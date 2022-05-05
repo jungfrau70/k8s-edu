@@ -1,0 +1,77 @@
+Prerequsites:
+- deploy-server
+
+References:
+- https://medium.com/@jyson88/kubectx-kubens-%EC%84%A4%EC%A0%95-%EB%B0%8F-%EC%9E%90%EB%8F%99-%EC%99%84%EC%84%B1-7b9192113a4d
+- https://github.com/ahmetb/kubectx/releases
+- https://kubernetes.io/docs/tasks/administer-cluster/
+
+export WORKDIR='/root/k8s/kind'
+cd $WORKDIR
+
+
+################################################################################################
+# 1. Apply tigera operator on c1
+################################################################################################
+
+kubectx kind-c1
+kubectl config get-contexts
+
+
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+
+cat >>tigera-c1.yaml<<EOF
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+  calicoNetwork:
+    ipPools:
+      - blockSize: 26
+        cidr: 10.240.0.0/16
+        encapsulation: VXLANCrossSubnet
+        natOutgoing: Enabled
+        nodeSelector: all()
+EOF
+
+kubectl apply -f tigera-c1.yaml 
+
+
+################################################################################################
+# 2. Apply tigera operator on c2
+################################################################################################
+
+kubectx kind-c2
+kubectl config get-contexts
+
+
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+
+cat >>tigera-c2.yaml<<EOF
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+  calicoNetwork:
+    ipPools:
+      - blockSize: 26
+        cidr: 10.241.0.0/16
+        encapsulation: VXLANCrossSubnet
+        natOutgoing: Enabled
+        nodeSelector: all()
+EOF
+
+kubectl apply -f tigera-c2.yaml 
+
+
+################################################################################################
+# 3. Check if Calico works
+################################################################################################
+
+kubectx kind-c1
+kubectl get pod -n calico-system
+
+kubectx kind-c2
+kubectl get pod -n calico-system
