@@ -11,19 +11,49 @@ export WORKDIR='/root/k8s-in-docker/kind'
 cd $WORKDIR
 
 ################################################################################################
-# 1. Install docker & docker-compose
+# 1. Install kubeadm
 ################################################################################################
 
-cat /etc/os-release
+cat >>config/install-kubeadm.sh<<EOFEOF
+#!/bin/bash
+cat <<EOF | tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
 
-bash config/install-docker.sh
+cat <<EOF | tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
 
+apt-get update -y
+apt-get install -y apt-transport-https ca-certificates curl
+
+curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+
+apt-get update
+apt-get install -y kubelet kubeadm kubectl
+apt-mark hold kubelet kubeadm kubectl
+EOFEOF
+
+bash config/install-kubeadm.sh
+
+################################################################################################
+# 1. Setup k8s cluster using kubeadm
+################################################################################################
+
+swapoff -a
+
+## comment swapfile in /etc/fstab
+sed -i ... swapfile 
+
+systemctl enable docker.service
 systemctl start docker
-systemctl enable docker
-docker --version
+systemctl status docker
 
-bash config/install-docker-compose.sh
-docker-compose --version
+kubeadm init --ignore-preflight-errors=all
 
 ################################################################################################
 # 2. Install kubectl
@@ -117,7 +147,8 @@ do
 done 
 
 ## Create another cluster
-kind create cluster --config kind-stg-config.yaml
+kind create cluster --config kind-cluster-c1.yaml
+kind create cluster --config kind-cluster-c2.yaml
 
 ################################################################################################
 # 5. Delete the cluster

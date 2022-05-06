@@ -4,8 +4,8 @@
 # 1. Install Utils
 ################################################################################################
 
-ifconfig
 sudo apt install -y net-tools git wget curl
+ifconfig
 
 
 ################################################################################################
@@ -40,7 +40,7 @@ ifconfig | grep inet
 
 C:\Users\inhwa\.ssh\config
 Host deploy-server
-  HostName 192.168.171.128
+  HostName 192.168.171.129
   User root
   # IdentityFile C:\Users\inhwa\.ssh\cloud9.pem
 

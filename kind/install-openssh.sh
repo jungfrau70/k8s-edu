@@ -9,7 +9,7 @@ apt-get install -y openssh-server
 
 echo "/etc/ssh/ssh_config"
 sed -i '/StrictHostKeyChecking/s/^#[ \t]*//g' /etc/ssh/ssh_config
-sed -i 's/StrictHostKeyChecking ask/StrictHostKeyChecking no/g' /etc/ssh/ssh_config
+# sed -i 's/StrictHostKeyChecking ask/StrictHostKeyChecking no/g' /etc/ssh/ssh_config
 # sed -i 's/StrictHostKeyChecking True/StrictHostKeyChecking no/g' /etc/ssh/ssh_config
 sed -i '/#   PasswordAuthentication yes/s/^#[ \t]*//g' /etc/ssh/ssh_config
 cat /etc/ssh/ssh_config | grep -v ^# | grep -v ^$

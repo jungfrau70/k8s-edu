@@ -4,7 +4,7 @@ Prerequsites:
 References:
 - https://www.composerize.com/
 
-export WORKDIR='/root/k8s/api-proxy'
+export WORKDIR='/root/k8s-in-docker/challenges/api-proxy'
 cd $WORKDIR
 
 #########################################################################################
@@ -56,5 +56,6 @@ curl localhost:6440
 
 (base) [root@deploy-server k8s]# curl localhost:6443
 curl: (52) Empty reply from server
+
 (base) [root@deploy-server k8s]# curl localhost:6440
 curl: (7) Failed connect to localhost:6440; Connection refused
