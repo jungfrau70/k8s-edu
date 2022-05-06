@@ -2,37 +2,28 @@ Prerequsites:
 - deploy-server
 
 References:
-- https://docs.docker.com/engine/install/
+- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 - https://mcvidanagama.medium.com/set-up-a-multi-node-kubernetes-cluster-locally-using-kind-eafd46dd63e5
 - https://kind.sigs.k8s.io/docs/user/configuration/
 - https://github.com/kubernetes-sigs/kind/releases
 
-export WORKDIR='/root/k8s/kind'
+export WORKDIR='/root/k8s-in-docker/kind'
 cd $WORKDIR
 
 ################################################################################################
-# 1. Install docker
+# 1. Install docker & docker-compose
 ################################################################################################
 
 cat /etc/os-release
 
-yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-engine
-
-
-curl -fsSL https://get.docker.com -o get-docker.sh
-#DRY_RUN=1 sh ./get-docker.sh
-sh ./get-docker.sh
+bash config/install-docker.sh
 
 systemctl start docker
 systemctl enable docker
+docker --version
 
+bash config/install-docker-compose.sh
+docker-compose --version
 
 ################################################################################################
 # 2. Install kubectl
