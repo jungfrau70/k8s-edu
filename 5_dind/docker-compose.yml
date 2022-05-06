@@ -4,10 +4,10 @@ services:
   kmaster1:
     hostname: kmaster1
     container_name: kmaster1
-    image: jungfrau70/ubuntu-k8s-master.1
-    build:
-      context: .
-      dockerfile: Dockerfile.k8s-master
+    # image: jungfrau70/ubuntu-k8s-master.1
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.k8s-master
     cap_add:
     - SYS_ADMIN
     environment:
