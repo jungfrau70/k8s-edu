@@ -121,3 +121,24 @@ kubectl expose deployment nginx3 --type=NodePort --port 30100
 kubectl get svc
 
 curl xxx.xxx.xxx.xxx:30100
+
+
+#########################################################################################
+# A. Cleanup all containers
+#########################################################################################
+
+## list
+docker ps -a
+
+## Remove
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+
+#########################################################################################
+# B. Trouble Shooting
+#########################################################################################
+
+# ref: https://serverfault.com/questions/772203/unable-to-run-hyperkube-kubernetes-locally-via-docker
+
+kubectl -s http://localhost:8080 cluster-info

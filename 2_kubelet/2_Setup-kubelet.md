@@ -23,9 +23,28 @@ EOF
 
 sysctl --system
 
+################################################################################################
+# 2. Check container runtime engine
+################################################################################################
+
+## kubernetes 1.16
+systemctl status kubelet
+systemctl status docker
+
+or
+
+## kubernetes 1.24 (without dockershim)
+systemctl status kubelet
+systemctl status containerd
 
 ################################################################################################
 # 2. Install kubelet / kubeadm / kubectl
 ################################################################################################
 
-bash config/install-kubeadm.sh
+## kubernetes 1.16
+bash config/install-kubelet-1.16.9.sh
+
+or
+
+## kubernetes 1.24 (without dockershim)
+bash config/install-kubelet-1.24.0.sh
