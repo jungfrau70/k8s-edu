@@ -12,8 +12,7 @@ apt-get remove -y kubelet kubeadm kubectl
 
 apt-get update -y
 
-#apt-get install -y kubeadm=1.16.9-00 kubelet=1.16.9-00 kubectl=1.16.9-00
-apt-get install -y kubeadm=1.24.0-00 kubelet=1.24.0-00 kubectl=1.24.0-00
+apt-get install -y kubeadm=1.19.6-00 kubelet=1.19.6-00 kubectl=1.19.6-00
 
 #Kubernetes is removing dockershim in the upcoming v1.24 release.
 #apt-get install -y kubeadm=1.24.0-00 kubelet=1.24.0-00 kubectl=1.24.0-00
