@@ -3,8 +3,12 @@
 
 cd 1_k8s
 
-bash config/kubeadm-reset.sh
-bash config/install-prereqs.sh
-bash config/configure-prereqs.sh
+bash config/0_kubeadm-reset.sh 
+bash config/1_install-prereqs.sh 
+swapoff -a
+vi /etc/fstab
 
-bash config/install-k8s-cluster.sh | tee info/installion-info.txt
+bash config/2_install-k8s-cluster.sh | tee info/installion-info.txt
+
+(if required)
+bash config/configure-prereqs.sh
