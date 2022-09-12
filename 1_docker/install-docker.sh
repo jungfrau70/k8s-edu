@@ -23,4 +23,4 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plu
 
 apt-cache madison docker-ce
 
-sudo apt-get install -y docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
+# sudo apt-get install -y docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
