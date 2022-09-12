@@ -14,3 +14,10 @@ sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/ssh
 
 cat /etc/ssh/sshd_config | grep PermitRootLogin
 cat /etc/ssh/sshd_config | grep PasswordAuthentication
+ufw allow ssh
+
+systemctl enable ssh.service
+systemctl daemon-reload
+systemctl restart ssh
+
+apt-get install net-tools
