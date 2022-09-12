@@ -20,3 +20,8 @@ apt-get install -y kubeadm=1.19.6-00 kubelet=1.19.6-00 kubectl=1.19.6-00
 
 apt-mark hold kubelet kubeadm kubectl
 
+
+#kubectlx -- switch between clusters
+echo "deb [trusted=yes] http://ftp.de.debian.org/debian buster main" >> /etc/apt/sources.list
+apt -y update && apt -y autoremove
+apt install -y kubectx
