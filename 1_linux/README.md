@@ -25,7 +25,7 @@ git clone https://github.com/jungfrau70/k8s-in-docker.git
 ################################################################################################
 cd
 cd k8s-in-docker/2_openssh
-bash config/install-openssh.sh
+bash install-openssh-ubuntu1804.sh
 
 
 ################################################################################################
