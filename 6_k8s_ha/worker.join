@@ -1,1 +1,0 @@
-kubeadm join localhost:6443 --token r33qu5.nbcrzy5o2kqu3bpy     --discovery-token-ca-cert-hash sha256:e208d27c24746c5103112eeb07756805f340fda9c88a26601a4746c451fdfb00 
