@@ -25,3 +25,7 @@ apt-mark hold kubelet kubeadm kubectl
 echo "deb [trusted=yes] http://ftp.de.debian.org/debian buster main" >> /etc/apt/sources.list
 apt -y update && apt -y autoremove
 apt install -y kubectx
+apt install -y kubens
+
+# kubectl config use-context ....
+# kubectx ...
