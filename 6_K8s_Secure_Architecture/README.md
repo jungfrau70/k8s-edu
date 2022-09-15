@@ -25,4 +25,5 @@ drwxr-xr-x 2 root root 4096 Sep 13 11:40 etcd/
 
 # cat /etc/kubernetes/admin.conf
 
+# cat /etc/kubernetes/kubelet.conf
 # ls -al /var/lib/kubelet/pki/
