@@ -24,3 +24,6 @@
 /root/PySpark/Step3_setup_spark_cluster/7_Airflow/postgres-data/global/*
 /root/PySpark/Step3_setup_spark_cluster/7_Airflow/postgres-data/pg_*/*
 workspace/8_Kafka/trips/yellow_tripdata_2021-01.csv
+*/venv/*
+*/venv/*/*
+*/venv/*/*/*
