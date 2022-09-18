@@ -5,24 +5,30 @@ Prerequsites:
 Reference:
 - https://airflow.apache.org/docs/apache-airflow/stable/tutorial.html
 
-export WORKDIR='/root/PySpark/workspace/'
+export WORKDIR='/root/k8s-edu/B_Airflow'
 cd $WORKDIR
 
 #########################################################################################
 # 1. (deploy-server) Activate Virtual Environment - pipeline
 #########################################################################################
 
-(base) conda-env list
-(base) conda activate pipeline
+apt install python3 python3-venv
+python3 -m venv venv --copies
+source venv\bin\activate
+
+pip install pip --upgrade
+pip install -r requriements.txt
+
+mkdir ~/airflow
 
 #########################################################################################
-# 2. (pipeline) Start Airflow
+# 2. (venv) Start Airflow
 #########################################################################################
 
 ## Get helps
 airflow -h
 
-airflow webserver --port 8081
+airflow webserver # --port 8080
 
 ## (Option) Make the loading example enabled/desabled
 sed -i "107s/True/False/" ~/airflow/airflow.cfg  # Disable
